@@ -1,17 +1,30 @@
-import { useState } from 'react';
-import { Button } from './components/ui/button';
+import { decrement, increment } from '@/redux/features/counter/counterSlice';
+import { Button } from '@/components/ui/button';
+import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
+import Home from '@/pages/Home/Home';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const count = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
 
   return (
     <>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <div className="flex items-center justify-center bg-red-600">
+        <Button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </Button>
+        <span className="font-semibold text-8xl">{count}</span>
+        <Button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
         </Button>
       </div>
-      <p>Click on the Vite and React logos to learn more</p>
+      <Home />
     </>
   );
 }
