@@ -1,30 +1,30 @@
 'use client';
 
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ThemeContext } from '@/context/ThemeContext';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext) ?? {
     theme: 'light',
     toggleTheme: () => {},
   };
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Mock auth handler
+  // Auth mock
   const handleAuth = () => {
     setIsLoggedIn(!isLoggedIn);
   };
 
   return (
-    <nav className="flex items-center justify-between px-4 py-3 border-b bg-background">
+    <nav className="flex items-center justify-between px-4 py-3 border-b bg-background relative">
       {/* Left: Logo */}
-      <span className="text-xl font-bold text-primary">TaskNest</span>
+      <span className="text-2xl font-bold text-cyan-400">TaskNest</span>
 
-      {/* Right: Theme toggle & Auth */}
-      <div className="flex items-center gap-4">
-        {/* Theme toggle button */}
+      {/* Right: Desktop buttons */}
+      <div className="hidden md:flex items-center gap-4">
         <button
           aria-label="Toggle Dark Mode"
           onClick={toggleTheme}
@@ -33,15 +33,53 @@ export default function Navbar() {
           {theme === 'dark' ? (
             <Sun className="w-5 h-5 text-yellow-400" />
           ) : (
-            <Moon className="w-5 h-5 text-gray-800" />
+            <Moon className="w-5 h-5 text-primary" />
           )}
         </button>
 
-        {/* Login / Logout Button */}
         <Button variant="outline" onClick={handleAuth}>
           {isLoggedIn ? 'Logout' : 'Login'}
         </Button>
       </div>
+
+      {/* Right: Mobile menu toggle button */}
+      <button
+        aria-label="Toggle Menu"
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="md:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      >
+        {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+      </button>
+
+      {/* Mobile menu content */}
+      {menuOpen && (
+        <div className="absolute top-full right-4 mt-2 flex flex-col items-end bg-background border rounded-md p-4 gap-4 shadow-lg md:hidden z-50">
+          <button
+            aria-label="Toggle Dark Mode"
+            onClick={() => {
+              toggleTheme();
+              setMenuOpen(false);
+            }}
+            className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+          >
+            {theme === 'dark' ? (
+              <Sun className="w-5 h-5 text-yellow-400" />
+            ) : (
+              <Moon className="w-5 h-5 text-primary" />
+            )}
+          </button>
+
+          <Button
+            variant="outline"
+            onClick={() => {
+              handleAuth();
+              setMenuOpen(false);
+            }}
+          >
+            {isLoggedIn ? 'Logout' : 'Login'}
+          </Button>
+        </div>
+      )}
     </nav>
   );
 }
