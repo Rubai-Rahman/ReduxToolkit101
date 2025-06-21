@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -74,6 +74,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --color-primary-start: #dc02c3;
+  --color-primary-end: #5c53fe;
 }
 
 .dark {
@@ -108,6 +110,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --color-primary-start: #dc02c3;
+  --color-primary-end: #5c53fe;
 }
 
 @layer base {
@@ -117,4 +121,15 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+@utility border-gradient-primary {
+  border: 3px solid transparent;
+  background: linear-gradient(var(--color-background), var(--color-background))
+      padding-box,
+    linear-gradient(
+        135deg,
+        var(--color-primary-start),
+        var(--color-primary-end)
+      )
+      border-box;
 }

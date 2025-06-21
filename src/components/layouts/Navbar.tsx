@@ -19,7 +19,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between px-4 py-3 border-b bg-background relative">
+    <nav className="fixed top-0 left-0 w-full flex items-center justify-between p-4  border-b bg-background z-50">
       {/* Left: Logo */}
       <span className="text-2xl font-bold text-cyan-400">TaskNest</span>
 
