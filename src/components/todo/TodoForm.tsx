@@ -17,7 +17,7 @@ export function TodoForm() {
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button>Open Dialog</Button>
+          <Button variant="outline">Open Dialog</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
