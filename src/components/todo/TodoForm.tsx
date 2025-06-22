@@ -33,8 +33,8 @@ export function TodoForm() {
               <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="username-1">Username</Label>
-              <Input id="username-1" name="username" defaultValue="@peduarte" />
+              <Label htmlFor="username-1">Description</Label>
+              <Input id="Description" name="Description" defaultValue="@peduarte" />
             </div>
           </div>
           <DialogFooter>
