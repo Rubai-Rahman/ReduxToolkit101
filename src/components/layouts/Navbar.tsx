@@ -18,7 +18,6 @@ export default function Navbar() {
 
   // 👉 Replace with YOUR namespace used in Action
   const roles = user?.['https://tnest.com'] || [];
-  console.log(user);
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -57,7 +56,16 @@ export default function Navbar() {
             </Button>
           </>
         ) : (
-          <Button variant="outline" onClick={() => loginWithRedirect()}>
+          <Button
+            variant="outline"
+            onClick={() =>
+              loginWithRedirect({
+                authorizationParams: {
+                  redirect_uri: window.location.origin + '/home',
+                },
+              })
+            }
+          >
             Login
           </Button>
         )}
@@ -113,7 +121,11 @@ export default function Navbar() {
             <Button
               variant="outline"
               onClick={() => {
-                loginWithRedirect();
+                loginWithRedirect({
+                  authorizationParams: {
+                    redirect_uri: window.location.origin + '/home',
+                  },
+                });
                 setMenuOpen(false);
               }}
             >

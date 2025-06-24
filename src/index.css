@@ -43,7 +43,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(1 0 10);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -74,8 +74,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --color-primary-start: #dc02c3;
-  --color-primary-end: #5c53fe;
+  --color-primary-start: #1ec5e2;
+  --color-primary-end: #5049db;
   --color-accent-end: oklch(0.78 0.2 190);
   --color-accent-middle: oklch(0.88 0.15 140);
   --color-accent-yellow: oklch(0.95 0.15 100);
@@ -85,7 +85,7 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0.25 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -116,8 +116,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --color-primary-start: #dc02c3;
-  --color-primary-end: #5c53fe;
+  --color-primary-start: #1ec5e2;
+  --color-primary-end: #5049db;
   --color-accent-end: oklch(0.78 0.2 190); /* #4ecdc4 approx */
   --color-accent-middle: oklch(0.88 0.15 140); /* #a8e6cf */
   --color-accent-yellow: oklch(0.95 0.15 100); /* #ffd93d */
@@ -220,11 +220,11 @@
 }
 
 @utility cta-button-primary {
-  @apply text-lg px-8 py-4 h-auto bg-white/95 hover:bg-white text-gray-900 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300;
+  @apply text-lg px-8 py-4 h-auto bg-white/95 hover:bg-white text-primary shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300;
 }
 
 @utility cta-button-secondary {
-  @apply text-lg px-8 py-4 h-auto border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300;
+  @apply text-lg px-8 py-4 h-auto border-2 border-white/30 text-foreground hover:bg-foreground/10 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300;
 }
 
 @utility cta-footer {
