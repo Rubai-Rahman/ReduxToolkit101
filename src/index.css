@@ -195,3 +195,63 @@
 @utility testimonial-user-title {
   @apply text-sm text-muted-foreground;
 }
+@utility cta-section {
+  @apply py-20 bg-gradient-to-br from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-primary-end)] relative overflow-hidden;
+}
+
+@utility cta-overlay {
+  @apply absolute inset-0 bg-gradient-to-br from-black/10 to-transparent;
+}
+
+@utility cta-blob {
+  @apply absolute rounded-full blur-xl animate-pulse;
+}
+
+@utility cta-content {
+  @apply container mx-auto px-4 text-center relative z-10;
+}
+
+@utility cta-heading {
+  @apply text-5xl font-bold text-white mb-6 drop-shadow-lg;
+}
+
+@utility cta-subtitle {
+  @apply text-xl text-white/90 mb-8 drop-shadow;
+}
+
+@utility cta-button-primary {
+  @apply text-lg px-8 py-4 h-auto bg-white/95 hover:bg-white text-gray-900 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300;
+}
+
+@utility cta-button-secondary {
+  @apply text-lg px-8 py-4 h-auto border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300;
+}
+
+@utility cta-footer {
+  @apply text-white/70 text-sm mt-4 drop-shadow;
+}
+/* === Footer Utilities === */
+
+@utility footer-section {
+  @apply bg-gradient-to-br from-card/95 to-card/80 backdrop-blur-xl border-t border-border/50 py-12 relative;
+}
+
+@utility footer-logo {
+  @apply w-8 h-8 bg-gradient-to-br from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-lg flex items-center justify-center shadow-lg;
+}
+
+@utility footer-brand {
+  @apply text-2xl font-bold bg-gradient-to-r from-[var(--destructive)] to-[var(--color-primary-end)] bg-clip-text text-transparent;
+}
+
+@utility footer-heading {
+  @apply font-semibold mb-4 text-card-foreground;
+}
+
+@utility footer-link {
+  @apply hover:text-transparent hover:bg-gradient-to-r hover:from-[var(--color-primary-start)] hover:to-[var(--color-primary-end)] hover:bg-clip-text transition-all duration-300;
+}
+
+@utility footer-bottom {
+  @apply border-t border-border/30 mt-8 pt-8 text-center text-muted-foreground;
+}
