@@ -4,6 +4,8 @@ import Login from '@/pages/Auth/Login';
 import Home from '@/pages/Home/Home';
 
 import { createBrowserRouter } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -15,11 +17,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/home',
-        element: <Home />,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/about',
-        element: <About />,
+        element: (
+          <ProtectedRoute allowedRoles={['admin']}>
+            <About />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

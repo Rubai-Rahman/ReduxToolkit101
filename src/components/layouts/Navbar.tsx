@@ -18,7 +18,7 @@ export default function Navbar() {
 
   // 👉 Replace with YOUR namespace used in Action
   const roles = user?.['https://tnest.com'] || [];
-  console.log('roles:', roles, 'user=', user);
+  console.log(user);
   if (isLoading) return <p>Loading...</p>;
 
   return (

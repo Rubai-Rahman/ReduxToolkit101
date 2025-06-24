@@ -17,6 +17,8 @@ createRoot(document.getElementById('root')!).render(
         redirect_uri: window.location.origin,
         audience: import.meta.env.VITE_AUTH0_AUDIENCE, // Optional but needed for backend API
       }}
+      cacheLocation="localstorage" // ✅ add this!
+      useRefreshTokens={true}
     >
       <Provider store={store}>
         <ThemeProvider>
