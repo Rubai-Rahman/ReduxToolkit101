@@ -4,22 +4,25 @@ import { useContext, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ThemeContext } from '@/context/ThemeContext';
 import { Sun, Moon, Menu, X } from 'lucide-react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext) ?? {
     theme: 'light',
     toggleTheme: () => {},
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Auth mock
-  const handleAuth = () => {
-    setIsLoggedIn(!isLoggedIn);
-  };
+  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } =
+    useAuth0();
+
+  // 👉 Replace with YOUR namespace used in Action
+  const roles = user?.['https://tnest.com'] || [];
+  console.log('roles:', roles, 'user=', user);
+  if (isLoading) return <p>Loading...</p>;
 
   return (
-    <nav className="fixed top-0 left-0 w-full flex items-center justify-between p-4  border-b bg-background z-50">
+    <nav className="fixed top-0 left-0 w-full flex items-center justify-between p-4 border-b bg-background z-50">
       {/* Left: Logo */}
       <span className="text-2xl font-bold text-cyan-400">TaskNest</span>
 
@@ -37,12 +40,30 @@ export default function Navbar() {
           )}
         </button>
 
-        <Button variant="outline" onClick={handleAuth}>
-          {isLoggedIn ? 'Logout' : 'Login'}
-        </Button>
+        {isAuthenticated ? (
+          <>
+            {/* Optional: show name */}
+            <span className="text-sm text-primary">
+              {user?.name} {roles.includes('admin') && '(Admin)'}
+            </span>
+
+            <Button
+              variant="outline"
+              onClick={() =>
+                logout({ logoutParams: { returnTo: window.location.origin } })
+              }
+            >
+              Logout
+            </Button>
+          </>
+        ) : (
+          <Button variant="outline" onClick={() => loginWithRedirect()}>
+            Login
+          </Button>
+        )}
       </div>
 
-      {/* Right: Mobile menu toggle button */}
+      {/* Right: Mobile menu toggle */}
       <button
         aria-label="Toggle Menu"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -69,15 +90,36 @@ export default function Navbar() {
             )}
           </button>
 
-          <Button
-            variant="outline"
-            onClick={() => {
-              handleAuth();
-              setMenuOpen(false);
-            }}
-          >
-            {isLoggedIn ? 'Logout' : 'Login'}
-          </Button>
+          {isAuthenticated ? (
+            <>
+              <span className="text-sm text-primary mb-2">
+                {user?.name} {roles.includes('admin') && '(Admin)'}
+              </span>
+
+              <Button
+                variant="outline"
+                onClick={() => {
+                  logout({
+                    logoutParams: { returnTo: window.location.origin },
+                  });
+
+                  setMenuOpen(false);
+                }}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={() => {
+                loginWithRedirect();
+                setMenuOpen(false);
+              }}
+            >
+              Login
+            </Button>
+          )}
         </div>
       )}
     </nav>
