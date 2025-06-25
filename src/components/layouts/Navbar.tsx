@@ -1,10 +1,9 @@
-'use client';
-
 import { useContext, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ThemeContext } from '@/context/ThemeContext';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import { useAuth0 } from '@auth0/auth0-react';
+import tasknestLogo from '@/assets/tasknest.svg';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext) ?? {
@@ -23,7 +22,14 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full flex items-center justify-between p-4 border-b bg-background z-50">
       {/* Left: Logo */}
-      <span className="text-2xl font-bold text-cyan-400">TaskNest</span>
+      <div className="flex items-center space-x-2">
+        <div className="w-8 h-8 bg-gradient-to-br">
+          <img src={tasknestLogo} alt="TaskNest Logo" />
+        </div>
+        <span className="text-2xl font-bold bg-gradient-to-r from-[var(--color-accent-start-light)] via-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent">
+          TaskNest
+        </span>
+      </div>
 
       {/* Right: Desktop buttons */}
       <div className="hidden md:flex items-center gap-4">
