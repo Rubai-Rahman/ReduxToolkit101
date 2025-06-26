@@ -29,7 +29,7 @@ const CtaSection = () => {
               className="cta-button-primary"
             >
               <Sparkles className="mr-2 h-5 w-5" />
-              Start Free Trial
+              Start Now
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button

@@ -27,7 +27,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            taskNest transforms chaos into clarity with{' '}
+            TaskNest transforms chaos into clarity with{' '}
             <span className="bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent font-semibold">
               AI-powered intelligence
             </span>
@@ -40,7 +40,7 @@ const HeroSection = () => {
               className="text-lg px-8 py-4 h-auto bg-gradient-to-r from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-primary-end)] hover:from-[var(--color-primary-start)] hover:via-[var(--color-primary-end)] hover:to-[var(--color-accent-end)] shadow-2xl shadow-primary/30 hover:shadow-3xl hover:shadow-primary/40 transition-all duration-500 transform hover:scale-105"
             >
               <Sparkles className="mr-2 h-5 w-5" />
-              Start Free Trial
+              Start Now
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button

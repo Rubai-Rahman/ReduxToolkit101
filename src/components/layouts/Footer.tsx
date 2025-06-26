@@ -1,4 +1,4 @@
-import { CheckCircle } from "lucide-react";
+import tasknestLogo from '@/assets/tasknest.svg';
 
 const Footer = () => {
   return (
@@ -7,13 +7,13 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="footer-logo">
-                <CheckCircle className="h-5 w-5 text-white" />
+              <div className="rounded size-8">
+                <img src={tasknestLogo} alt="TaskNest Logo" />
               </div>
-              <span className="footer-brand">taskNest</span>
+              <span className="footer-brand">TaskNest</span>
             </div>
             <p className="text-muted-foreground">
-              Empowering teams to achieve more through{' '}
+              Empowering teams to achieve more through
               <span className="bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent font-semibold">
                 intelligent task management
               </span>
@@ -101,7 +101,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; 2024 taskNest. All rights reserved.</p>
+          <p>&copy; 2025 TaskNest. All rights reserved.</p>
         </div>
       </div>
     </footer>

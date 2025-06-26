@@ -236,10 +236,6 @@
   @apply bg-gradient-to-br from-card/95 to-card/80 backdrop-blur-xl border-t border-border/50 py-12 relative;
 }
 
-@utility footer-logo {
-  @apply w-8 h-8 bg-gradient-to-br from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-lg flex items-center justify-center shadow-lg;
-}
-
 @utility footer-brand {
   @apply text-2xl font-bold bg-gradient-to-r from-[var(--destructive)] to-[var(--color-primary-end)] bg-clip-text text-transparent;
 }
