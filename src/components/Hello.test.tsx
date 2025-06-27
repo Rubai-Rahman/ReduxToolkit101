@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 function Hello() {
-  return <h1>Hello World</h1>;
+  return <h1>Hello World!</h1>;
 }
 
 describe("Hello component", () => {
