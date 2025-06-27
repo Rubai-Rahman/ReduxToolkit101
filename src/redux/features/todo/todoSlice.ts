@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 type TTodo = {
   title: string;
@@ -13,7 +13,7 @@ const initialState: TinitialState = {
 };
 
 const todoSlice = createSlice({
-  name: 'todo',
+  name: "todo",
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<TTodo>) => {

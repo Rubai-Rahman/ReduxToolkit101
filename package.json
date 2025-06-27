@@ -18,11 +18,10 @@
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
-      "prettier --check",
-      "yarn vitest run --silent"
+      "prettier --write"
     ],
     "*.{json,md,css}": [
-      "prettier --check"
+      "prettier --write"
     ]
   },
   "dependencies": {

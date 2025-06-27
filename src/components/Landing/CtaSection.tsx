@@ -1,5 +1,5 @@
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { Button } from '../ui/button';
+import { ArrowRight, Sparkles } from "lucide-react";
+import { Button } from "../ui/button";
 
 const CtaSection = () => {
   return (
@@ -16,7 +16,7 @@ const CtaSection = () => {
         <div className="max-w-3xl mx-auto">
           <h2 className="cta-heading">Ready to transform your productivity?</h2>
           <p className="cta-subtitle">
-            Join thousands of teams who have already made the switch to{' '}
+            Join thousands of teams who have already made the switch to{" "}
             <span className="font-semibold text-white">
               AI-powered task management
             </span>

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Plus, Calendar, Users } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CheckCircle, Plus, Calendar, Users } from "lucide-react";
 
 export default function Dashboard() {
   return (
@@ -19,10 +19,10 @@ export default function Dashboard() {
         {/* Stats */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           {[
-            { label: 'Total Tasks', value: 24, color: 'text-foreground' },
-            { label: 'Completed', value: 18, color: 'text-green-600' },
-            { label: 'In Progress', value: 4, color: 'text-blue-600' },
-            { label: 'Overdue', value: 2, color: 'text-red-600' },
+            { label: "Total Tasks", value: 24, color: "text-foreground" },
+            { label: "Completed", value: 18, color: "text-green-600" },
+            { label: "In Progress", value: 4, color: "text-blue-600" },
+            { label: "Overdue", value: 2, color: "text-red-600" },
           ].map((stat, idx) => (
             <Card key={idx}>
               <CardHeader className="pb-2">
@@ -58,18 +58,18 @@ export default function Dashboard() {
                   {[
                     {
                       completed: true,
-                      title: 'Complete project proposal',
-                      due: 'Today',
+                      title: "Complete project proposal",
+                      due: "Today",
                     },
                     {
                       completed: false,
-                      title: 'Review team feedback',
-                      due: 'Tomorrow',
+                      title: "Review team feedback",
+                      due: "Tomorrow",
                     },
                     {
                       completed: false,
-                      title: 'Update documentation',
-                      due: 'Friday',
+                      title: "Update documentation",
+                      due: "Friday",
                     },
                   ].map((task, idx) => (
                     <div

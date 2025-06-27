@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,9 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function TodoForm() {
   return (
@@ -34,7 +34,11 @@ export function TodoForm() {
             </div>
             <div className="grid gap-3">
               <Label htmlFor="username-1">Description</Label>
-              <Input id="Description" name="Description" defaultValue="@peduarte" />
+              <Input
+                id="Description"
+                name="Description"
+                defaultValue="@peduarte"
+              />
             </div>
           </div>
           <DialogFooter>

@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useEffect, useState, type ReactNode } from "react";
 
-type Theme = 'light' | 'dark';
+type Theme = "light" | "dark";
 
 interface ThemeContextType {
   theme: Theme;
@@ -8,7 +8,7 @@ interface ThemeContextType {
 }
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(
-  undefined
+  undefined,
 );
 
 interface ThemeProviderProps {
@@ -16,19 +16,19 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme === 'dark' || savedTheme === 'light') {
+    const savedTheme = localStorage.getItem("theme") as Theme | null;
+    if (savedTheme === "dark" || savedTheme === "light") {
       setTheme(savedTheme);
       updateHtmlClass(savedTheme);
     } else {
       // OS preference detect
       const prefersDark = window.matchMedia(
-        '(prefers-color-scheme: dark)'
+        "(prefers-color-scheme: dark)",
       ).matches;
-      const defaultTheme: Theme = prefersDark ? 'dark' : 'light';
+      const defaultTheme: Theme = prefersDark ? "dark" : "light";
       setTheme(defaultTheme);
       updateHtmlClass(defaultTheme);
     }
@@ -36,17 +36,17 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   function updateHtmlClass(theme: Theme) {
     const html = document.documentElement;
-    if (theme === 'dark') {
-      html.classList.add('dark');
+    if (theme === "dark") {
+      html.classList.add("dark");
     } else {
-      html.classList.remove('dark');
+      html.classList.remove("dark");
     }
   }
 
   function toggleTheme() {
-    const newTheme: Theme = theme === 'dark' ? 'light' : 'dark';
+    const newTheme: Theme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    localStorage.setItem("theme", newTheme);
     updateHtmlClass(newTheme);
   }
 

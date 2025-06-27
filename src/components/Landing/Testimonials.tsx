@@ -1,5 +1,5 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Star } from 'lucide-react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Star } from "lucide-react";
 
 const Testimonials = () => {
   return (
@@ -7,7 +7,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Loved by{' '}
+            Loved by{" "}
             <span className="bg-gradient-to-r from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-accent-start)] bg-clip-text text-transparent">
               teams worldwide
             </span>
@@ -27,10 +27,10 @@ const Testimonials = () => {
               </div>
               <p className="testimonial-text">
                 "taskNest has completely transformed how our team manages
-                projects. The{' '}
+                projects. The{" "}
                 <span className="bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent font-semibold">
                   AI-powered features
-                </span>{' '}
+                </span>{" "}
                 make collaboration effortless."
               </p>
               <div className="testimonial-user">
@@ -60,10 +60,10 @@ const Testimonials = () => {
               </div>
               <p className="testimonial-text">
                 "The automation features save us hours every week. We can focus
-                on{' '}
+                on{" "}
                 <span className="text-[var(--color-accent-start)] font-semibold">
                   creative work
-                </span>{' '}
+                </span>{" "}
                 while taskNest handles the routine tasks."
               </p>
               <div className="testimonial-user">
@@ -92,10 +92,10 @@ const Testimonials = () => {
                 ))}
               </div>
               <p className="testimonial-text">
-                "Best task management tool we've used. The{' '}
+                "Best task management tool we've used. The{" "}
                 <span className="bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-accent-start)] bg-clip-text text-transparent font-semibold">
                   predictive analytics
-                </span>{' '}
+                </span>{" "}
                 help us optimize our workflow."
               </p>
               <div className="testimonial-user">

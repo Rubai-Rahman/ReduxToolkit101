@@ -1,14 +1,14 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
-import { Provider } from 'react-redux';
-import { store } from '@/redux/store.ts';
-import { RouterProvider } from 'react-router-dom';
-import router from '@/routes/routes.tsx';
-import { ThemeProvider } from './context/ThemeContext';
-import { Auth0Provider } from '@auth0/auth0-react';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store.ts";
+import { RouterProvider } from "react-router-dom";
+import router from "@/routes/routes.tsx";
+import { ThemeProvider } from "./context/ThemeContext";
+import { Auth0Provider } from "@auth0/auth0-react";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Auth0Provider
       domain={import.meta.env.VITE_AUTH0_DOMAIN}
@@ -26,5 +26,5 @@ createRoot(document.getElementById('root')!).render(
         </ThemeProvider>
       </Provider>
     </Auth0Provider>
-  </StrictMode>
+  </StrictMode>,
 );

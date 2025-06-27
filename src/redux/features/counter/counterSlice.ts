@@ -1,5 +1,5 @@
-import type { RootState } from '@/redux/store';
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from "@/redux/store";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
 export interface CounterState {
@@ -11,7 +11,7 @@ const initialState: CounterState = {
   value: 0,
 };
 export const counterSlice = createSlice({
-  name: 'counter',
+  name: "counter",
   initialState,
   reducers: {
     increment: (state) => {

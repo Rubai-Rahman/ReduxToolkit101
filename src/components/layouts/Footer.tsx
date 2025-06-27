@@ -1,4 +1,4 @@
-import tasknestLogo from '@/assets/tasknest.svg';
+import tasknestLogo from "@/assets/tasknest.svg";
 
 const Footer = () => {
   return (

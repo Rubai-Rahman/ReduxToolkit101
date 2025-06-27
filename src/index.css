@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -136,7 +136,8 @@
 }
 @utility border-gradient-primary {
   border: 3px solid transparent;
-  background: linear-gradient(var(--color-background), var(--color-background))
+  background:
+    linear-gradient(var(--color-background), var(--color-background))
       padding-box,
     linear-gradient(
         135deg,

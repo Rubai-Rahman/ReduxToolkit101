@@ -1,6 +1,6 @@
-import { ArrowRight, Play, Sparkles } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
+import { ArrowRight, Play, Sparkles } from "lucide-react";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 
 const HeroSection = () => {
   return (
@@ -21,13 +21,13 @@ const HeroSection = () => {
           <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
             Your Tasks,
             <span className="bg-gradient-to-r from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-accent-end)] bg-clip-text text-transparent animate-pulse">
-              {' '}
+              {" "}
               Perfectly Organized
             </span>
           </h1>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            TaskNest transforms chaos into clarity with{' '}
+            TaskNest transforms chaos into clarity with{" "}
             <span className="bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent font-semibold">
               AI-powered intelligence
             </span>

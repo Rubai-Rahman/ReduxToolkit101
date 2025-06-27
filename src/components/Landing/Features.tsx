@@ -4,7 +4,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   BarChart3,
   Bell,
@@ -12,7 +12,7 @@ import {
   CheckCircle,
   Users,
   Zap,
-} from 'lucide-react';
+} from "lucide-react";
 
 const Features = () => {
   return (
@@ -23,16 +23,16 @@ const Features = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Everything you need to stay{' '}
+            Everything you need to stay{" "}
             <span className="bg-gradient-to-r from-[var(--destructive)] to-[var(--color-primary-end)] bg-clip-text text-transparent">
               productive
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Powerful features designed with{' '}
+            Powerful features designed with{" "}
             <span className="bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-accent-end)] bg-clip-text text-transparent font-semibold">
               cutting-edge AI
-            </span>{' '}
+            </span>{" "}
             to help you accomplish more, faster.
           </p>
         </div>
@@ -50,7 +50,7 @@ const Features = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base text-muted-foreground">
-                Create, organize, and prioritize tasks with{' '}
+                Create, organize, and prioritize tasks with{" "}
                 <span className="text-[var(--destructive)] font-semibold">
                   AI-powered automation
                 </span>
@@ -71,7 +71,7 @@ const Features = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base text-muted-foreground">
-                Work together with{' '}
+                Work together with{" "}
                 <span className="text-[var(--color-accent-end)] font-semibold">
                   real-time sync
                 </span>
@@ -92,7 +92,7 @@ const Features = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base text-muted-foreground">
-                Track progress with{' '}
+                Track progress with{" "}
                 <span className="bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent font-semibold">
                   AI insights
                 </span>
@@ -114,7 +114,7 @@ const Features = () => {
             <CardContent>
               <CardDescription className="text-base text-muted-foreground">
                 Sync with your favorite calendar apps. View deadlines, meetings,
-                and tasks in{' '}
+                and tasks in{" "}
                 <span className="text-[var(--color-accent-yellow)] font-semibold">
                   one unified timeline
                 </span>
@@ -135,10 +135,10 @@ const Features = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base text-muted-foreground">
-                Stay informed with{' '}
+                Stay informed with{" "}
                 <span className="text-[var(--color-accent-middle)] font-semibold">
                   AI-powered notifications
-                </span>{' '}
+                </span>{" "}
                 that adapt to your schedule and preferences.
               </CardDescription>
             </CardContent>
@@ -156,7 +156,7 @@ const Features = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base text-muted-foreground">
-                Automate repetitive tasks with{' '}
+                Automate repetitive tasks with{" "}
                 <span className="text-[var(--color-accent-start-light)] font-semibold">
                   machine learning workflows
                 </span>

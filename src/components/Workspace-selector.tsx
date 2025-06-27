@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -17,34 +17,34 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
-import { Plus, Users, ArrowRight, Building2, CheckCircle } from 'lucide-react';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Plus, Users, ArrowRight, Building2, CheckCircle } from "lucide-react";
 
 // 🧪 MOCK DATA
 const mockWorkspaces = [
   {
-    id: '1',
-    name: 'Marketing Team',
-    description: 'Collaborate on campaigns',
-    slug: 'marketing-team',
+    id: "1",
+    name: "Marketing Team",
+    description: "Collaborate on campaigns",
+    slug: "marketing-team",
     members: [
-      { id: 'u1', user: { name: 'Alice' } },
-      { id: 'u2', user: { name: 'Bob' } },
-      { id: 'u3', user: { name: 'Charlie' } },
+      { id: "u1", user: { name: "Alice" } },
+      { id: "u2", user: { name: "Bob" } },
+      { id: "u3", user: { name: "Charlie" } },
     ],
   },
   {
-    id: '2',
-    name: 'Dev Team',
-    description: 'Frontend and Backend synergy',
-    slug: 'dev-team',
+    id: "2",
+    name: "Dev Team",
+    description: "Frontend and Backend synergy",
+    slug: "dev-team",
     members: [
-      { id: 'u4', user: { name: 'David' } },
-      { id: 'u5', user: { name: 'Eva' } },
+      { id: "u4", user: { name: "David" } },
+      { id: "u5", user: { name: "Eva" } },
     ],
   },
 ];
@@ -55,8 +55,8 @@ export default function WorkspaceSelector() {
   // 👉 local mocks instead of RTK Query
   const [workspaces, setWorkspaces] = useState(mockWorkspaces);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
-  const [workspaceName, setWorkspaceName] = useState('');
-  const [workspaceDescription, setWorkspaceDescription] = useState('');
+  const [workspaceName, setWorkspaceName] = useState("");
+  const [workspaceDescription, setWorkspaceDescription] = useState("");
   const [isCreating, setIsCreating] = useState(false);
 
   const handleCreateWorkspace = async (e: React.FormEvent) => {
@@ -69,20 +69,20 @@ export default function WorkspaceSelector() {
         id: Date.now().toString(),
         name: workspaceName,
         description: workspaceDescription,
-        slug: workspaceName.toLowerCase().replace(/\s+/g, '-'),
+        slug: workspaceName.toLowerCase().replace(/\s+/g, "-"),
         members: [
           {
-            id: 'self',
+            id: "self",
             user: {
-              name: user?.name || 'You',
+              name: user?.name || "You",
             },
           },
         ],
       };
       setWorkspaces((prev) => [...prev, newWorkspace]);
       setIsCreateDialogOpen(false);
-      setWorkspaceName('');
-      setWorkspaceDescription('');
+      setWorkspaceName("");
+      setWorkspaceDescription("");
       setIsCreating(false);
       window.location.href = `/workspace/${newWorkspace.slug}`;
     }, 800);
@@ -138,7 +138,7 @@ export default function WorkspaceSelector() {
       <main className="container mx-auto px-4 py-12 z-10 relative">
         <div className="max-w-4xl mx-auto text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            Choose your{' '}
+            Choose your{" "}
             <span className="bg-gradient-to-r from-[#ff6b6b] to-[var(--color-primary-end)] bg-clip-text text-transparent">
               workspace
             </span>
@@ -251,7 +251,7 @@ export default function WorkspaceSelector() {
                   className="w-full bg-gradient-to-r from-[#ff6b6b] to-[var(--color-primary-start)]"
                   disabled={isCreating}
                 >
-                  {isCreating ? 'Creating...' : 'Create Workspace'}
+                  {isCreating ? "Creating..." : "Create Workspace"}
                 </Button>
               </form>
             </DialogContent>

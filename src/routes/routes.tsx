@@ -1,22 +1,22 @@
-import App from '@/App';
-import About from '@/pages/About/About';
-import Landing from '@/pages/Landing/Landing';
-import Home from '@/pages/Home/Home';
+import App from "@/App";
+import About from "@/pages/About/About";
+import Landing from "@/pages/Landing/Landing";
+import Home from "@/pages/Home/Home";
 
-import { createBrowserRouter } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
+import { createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Landing />,
       },
       {
-        path: '/home',
+        path: "/home",
         element: (
           <ProtectedRoute>
             <Home />
@@ -24,9 +24,9 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/about',
+        path: "/about",
         element: (
-          <ProtectedRoute allowedRoles={['admin']}>
+          <ProtectedRoute allowedRoles={["admin"]}>
             <About />
           </ProtectedRoute>
         ),
