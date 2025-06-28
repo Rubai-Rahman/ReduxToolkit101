@@ -5,7 +5,7 @@ function Hello() {
 }
 
 describe('Hello component', () => {
-  it('render correctly again test', () => {
+  it('render correctly again', () => {
     render(<Hello />);
     expect(screen.getByText('Hello World')).toBeInTheDocument();
   });
