@@ -1,9 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "✅ Husky pre-commit is running (via Volta)"
-
-echo "Node path: $(command -v node || echo 'not found')"
-echo "Yarn path: $(command -v yarn || echo 'not found')"
+echo "✅ Husky pre-commit hook started" | tee -a .husky/hook.log
+echo "Node: $(command -v node)" | tee -a .husky/hook.log
+echo "Yarn: $(command -v yarn)" | tee -a .husky/hook.log
 
 yarn test || exit 1
