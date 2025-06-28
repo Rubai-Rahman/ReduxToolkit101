@@ -1,23 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "✅ Husky hook is running"
+echo "✅ Husky pre-commit is running (via Volta)"
 
-# Load NVM (for GUI environments that don't have node)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+echo "Node path: $(command -v node || echo 'not found')"
+echo "Yarn path: $(command -v yarn || echo 'not found')"
 
-# Fallback message if node/yarn is missing
-if ! command -v node > /dev/null 2>&1; then
-  echo "❌ Node is not available in this environment"
-  exit 1
-fi
-
-if ! command -v yarn > /dev/null 2>&1; then
-  echo "❌ Yarn is not available in this environment"
-  exit 1
-fi
-
-# Run your actual test
-echo "▶️ Running tests with Yarn..."
 yarn test || exit 1
