@@ -1,8 +1,12 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "✅ Husky pre-commit hook started" | tee -a .husky/hook.log
-echo "Node: $(command -v node)" | tee -a .husky/hook.log
-echo "Yarn: $(command -v yarn)" | tee -a .husky/hook.log
+# Add Volta to PATH explicitly for VS Code GUI
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+echo "✅ Husky pre-commit hook started"
+echo "Node: $(command -v node)"
+echo "Yarn: $(command -v yarn)"
 
 yarn test || exit 1
