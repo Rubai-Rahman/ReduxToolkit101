@@ -13,7 +13,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:ci": "vitest --run"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
