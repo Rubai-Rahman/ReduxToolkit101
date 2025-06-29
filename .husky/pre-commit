@@ -1,11 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Add multiple Node.js paths for better VS Code compatibility
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:/usr/local/bin:/c/Program Files/nodejs:$PATH"
 
-
-# Run the actual test
-echo "Running tests..."
-yarn test:ci || exit 1
+yarn test|| exit 1
