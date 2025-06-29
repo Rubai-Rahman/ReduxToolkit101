@@ -1,12 +1,11 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Add Volta to PATH explicitly for VS Code GUI
+# Add multiple Node.js paths for better VS Code compatibility
 export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="$VOLTA_HOME/bin:/usr/local/bin:/c/Program Files/nodejs:$PATH"
 
-echo "✅ Husky pre-commit hook started"
-echo "Node: $(command -v node)"
-echo "Yarn: $(command -v yarn)"
 
+# Run the actual test
+echo "Running tests..."
 yarn test:ci || exit 1
