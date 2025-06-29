@@ -5,8 +5,8 @@
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-echo "✅ Husky pre-commit hook started"
-echo "Node: $(command -v node)"
-echo "Yarn: $(command -v yarn)"
+# echo "✅ Husky pre-commit hook started"
+# echo "Node: $(command -v node)"
+# echo "Yarn: $(command -v yarn)"
 
 yarn test || exit 1
