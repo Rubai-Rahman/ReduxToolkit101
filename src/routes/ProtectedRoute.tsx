@@ -1,5 +1,6 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { Navigate } from "react-router-dom";
+import NotFound from '@/components/404-Notfound';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Navigate } from 'react-router-dom';
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
@@ -16,13 +17,13 @@ const ProtectedRoute = ({
   if (!isAuthenticated) return <Navigate to="/" replace />;
   console.log(user);
 
-  const roles = user?.["https://tnest.com"] || [];
+  const roles = user?.['https://tnest.com'] || [];
 
   if (
     allowedRoles.length &&
     !roles.some((role: string) => allowedRoles.includes(role))
   ) {
-    return <p className="text-center mt-8 text-destructive">Access Denied</p>;
+    return <NotFound />;
   }
 
   return <>{children}</>;
