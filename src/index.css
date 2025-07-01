@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -162,40 +162,9 @@
   @apply text-muted-foreground font-medium;
 }
 @utility testimonial-card {
-  @apply border border-border/50 shadow-xl transition-all duration-500 bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl;
+  @apply border border-border/50 shadow-xl transition-all duration-500 bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl hover:shadow-2xl hover:scale-105;
 }
 
-@utility testimonial-card-hover {
-  @apply hover:shadow-2xl hover:scale-105;
-}
-
-@utility testimonial-content {
-  @apply p-6;
-}
-
-@utility testimonial-stars {
-  @apply flex mb-4;
-}
-
-@utility testimonial-text {
-  @apply text-muted-foreground mb-4;
-}
-
-@utility testimonial-user {
-  @apply flex items-center;
-}
-
-@utility testimonial-avatar {
-  @apply w-12 h-12 rounded-full flex items-center justify-center mr-3 shadow-lg;
-}
-
-@utility testimonial-user-name {
-  @apply font-semibold text-card-foreground;
-}
-
-@utility testimonial-user-title {
-  @apply text-sm text-muted-foreground;
-}
 @utility cta-section {
   @apply py-20 bg-gradient-to-br from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-primary-end)] relative overflow-hidden;
 }
@@ -251,4 +220,23 @@
 
 @utility footer-bottom {
   @apply border-t border-border/30 mt-8 pt-8 text-center text-muted-foreground;
+}
+
+@utility gradient-text-1 {
+  @apply bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent;
+}
+@utility gradient-text-2 {
+  @apply bg-gradient-to-r from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-accent-end)] bg-clip-text text-transparent;
+}
+
+@utility gradient-bg-1 {
+  @apply bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)];
+}
+
+@utility gradient-bg-2 {
+  @apply bg-gradient-to-r from-[var(--destructive)] to-[var(--color-primary-start)];
+}
+
+@utility gradient-bg-3 {
+  @apply bg-gradient-to-r from-[var(--destructive)] to-[var(--color-primary-start)];
 }
