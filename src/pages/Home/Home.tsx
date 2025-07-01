@@ -1,9 +1,10 @@
 // import TodoContainer from '@/components/todo/TodoContainer';
-import Dashboard from "@/components/Dashboard";
-import TodoFilter from "@/components/todo/TodoFilter";
-import { TodoForm } from "@/components/todo/TodoForm";
-import Container from "@/components/ui/Container";
-import WorkspaceSelector from "@/components/Workspace-selector";
+import Dashboard from '@/components/Dashboard';
+import TodoContainer from '@/components/todo/TodoContainer';
+import TodoFilter from '@/components/todo/TodoFilter';
+import { TodoForm } from '@/components/todo/TodoForm';
+import Container from '@/components/ui/Container';
+import WorkspaceSelector from '@/components/Workspace-selector';
 
 const Home = () => {
   return (
@@ -17,7 +18,7 @@ const Home = () => {
       </div>
       <Dashboard />
       <WorkspaceSelector />
-      {/* <TodoContainer /> */}
+      <TodoContainer />
     </Container>
   );
 };
