@@ -3,11 +3,11 @@ import { Button } from '../ui/button';
 
 const CtaSection = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-2 py-20">
+    <section className="relative overflow-hidden bg-gradient-2 py-16 sm:py-20">
       {/* Top Curve */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
         <svg
-          className="relative block w-[calc(100%+1.3px)] h-[100px]"
+          className="block w-full h-[80px] sm:h-[100px]"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="1200 0 1200 120"
           preserveAspectRatio="none"
@@ -22,18 +22,18 @@ const CtaSection = () => {
 
       {/* CTA Content */}
       <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <h2 className="text-5xl font-bold text-foreground drop-shadow-lg mb-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground drop-shadow-lg mb-6 leading-snug">
           Ready to transform your productivity?
         </h2>
-        <p className="text-xl text-foreground/90 mb-8 drop-shadow">
+        <p className="text-base sm:text-lg md:text-xl text-foreground/90 mb-8 drop-shadow">
           Join thousands of teams who have already made the switch to{' '}
           <span className="font-semibold text-white">
             AI-powered task management
           </span>
           .
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" variant="secondary" className="">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button size="lg" variant="secondary">
             <Sparkles className="mr-2 h-5 w-5 text-accent-end" />
             Start Now
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -42,7 +42,7 @@ const CtaSection = () => {
             Schedule Demo
           </Button>
         </div>
-        <p className="text-sm mt-4 drop-shadow">
+        <p className="text-sm mt-4 drop-shadow text-foreground/70">
           No credit card required • 14-day free trial • Cancel anytime
         </p>
       </div>
@@ -50,7 +50,7 @@ const CtaSection = () => {
       {/* Bottom Curve */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
         <svg
-          className="relative block w-[calc(100%+1.3px)] h-[100px]"
+          className="block w-full h-[80px] sm:h-[100px]"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
