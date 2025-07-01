@@ -39,6 +39,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-accent-end: var(--accent-end);
 }
 
 :root {
@@ -74,14 +75,13 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --color-primary-start: #1ec5e2;
-  --color-primary-end: #5049db;
-  --color-accent-end: oklch(0.78 0.2 190);
-  --color-accent-middle: oklch(0.88 0.15 140);
-  --color-accent-yellow: oklch(0.95 0.15 100);
-  --color-accent-start-light: oklch(0.82 0.2 30);
-  --color-accent-yellow-light: oklch(0.98 0.12 100); /* #ffed4e */
-  --color-accent-end-light: oklch(0.9 0.15 190); /* #6ee7d7 */
+  --primary-start: #1ec5e2;
+  --primary-end: #5049db;
+  --accent-end: oklch(0.78 0.2 190);
+  --accent-yellow: oklch(0.95 0.15 100);
+  --accent-start-light: oklch(0.82 0.2 30);
+  --accent-yellow-light: oklch(0.98 0.12 100); /* #ffed4e */
+  --accent-end-light: oklch(0.9 0.15 190); /* #6ee7d7 */
 }
 
 .dark {
@@ -116,14 +116,13 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --color-primary-start: #1ec5e2;
-  --color-primary-end: #5049db;
-  --color-accent-end: oklch(0.78 0.2 190); /* #4ecdc4 approx */
-  --color-accent-middle: oklch(0.88 0.15 140); /* #a8e6cf */
-  --color-accent-yellow: oklch(0.95 0.15 100); /* #ffd93d */
-  --color-accent-start-light: oklch(0.82 0.2 30); /* #ff8e8e */
-  --color-accent-yellow-light: oklch(0.98 0.12 100); /* #ffed4e */
-  --color-accent-end-light: oklch(0.9 0.15 190); /* #6ee7d7 */
+  --primary-start: #1ec5e2;
+  --primary-end: #5049db;
+  --accent-end: oklch(0.78 0.2 190); /* #4ecdc4 approx */
+  --accent-yellow: oklch(0.95 0.15 100); /* #ffd93d */
+  --accent-start-light: oklch(0.82 0.2 30); /* #ff8e8e */
+  --accent-yellow-light: oklch(0.98 0.12 100); /* #ffed4e */
+  --accent-end-light: oklch(0.9 0.15 190); /* #6ee7d7 */
 }
 
 @layer base {
@@ -139,12 +138,7 @@
   background:
     linear-gradient(var(--color-background), var(--color-background))
       padding-box,
-    linear-gradient(
-        135deg,
-        var(--color-primary-start),
-        var(--color-primary-end)
-      )
-      border-box;
+    linear-gradient(135deg, var(--primary-start), var(--primary-end)) border-box;
 }
 @utility stat-card {
   @apply p-8 rounded-2xl bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-xl border border-border/30 shadow-xl transition-all duration-500;
@@ -172,7 +166,7 @@
 }
 
 @utility footer-brand {
-  @apply text-2xl font-bold bg-gradient-to-r from-[var(--destructive)] to-[var(--color-primary-end)] bg-clip-text text-transparent;
+  @apply text-2xl font-bold bg-gradient-to-r from-[var(--destructive)] to-[var(--primary-end)] bg-clip-text text-transparent;
 }
 
 @utility footer-heading {
@@ -180,7 +174,7 @@
 }
 
 @utility footer-link {
-  @apply hover:text-transparent hover:bg-gradient-to-r hover:from-[var(--color-primary-start)] hover:to-[var(--color-primary-end)] hover:bg-clip-text transition-all duration-300;
+  @apply hover:text-transparent hover:bg-gradient-to-r hover:from-[var(--primary-start)] hover:to-[var(--primary-end)] hover:bg-clip-text transition-all duration-300;
 }
 
 @utility footer-bottom {
@@ -188,20 +182,20 @@
 }
 
 @utility gradient-text-1 {
-  @apply bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-[var(--primary-start)] to-[var(--primary-end)] bg-clip-text text-transparent;
 }
 @utility gradient-text-2 {
-  @apply bg-gradient-to-r from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-accent-end)] bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-[var(--destructive)] via-[var(--primary-start)] to-[var(--accent-end)] bg-clip-text text-transparent;
 }
 
-@utility gradient-bg-1 {
-  @apply bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)];
+@utility bg-gradient-1 {
+  @apply bg-gradient-to-r from-[var(--primary-start)] to-[var(--primary-end)];
 }
 
-@utility gradient-bg-2 {
-  @apply bg-gradient-to-r from-[var(--destructive)] via-[var(--color-primary-start)] to-[var(--color-primary-end)];
+@utility bg-gradient-2 {
+  @apply bg-gradient-to-r from-[var(--destructive)] via-[var(--primary-start)] to-[var(--primary-end)];
 }
 
-@utility gradient-bg-3 {
-  @apply bg-gradient-to-r from-[var(--destructive)] to-[var(--color-primary-start)];
+@utility bg-gradient-3 {
+  @apply bg-gradient-to-r from-[var(--destructive)] to-[var(--primary-start)];
 }

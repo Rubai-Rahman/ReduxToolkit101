@@ -1,13 +1,13 @@
-import { useContext, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ThemeContext } from "@/context/ThemeContext";
-import { Sun, Moon, Menu, X } from "lucide-react";
-import { useAuth0 } from "@auth0/auth0-react";
-import tasknestLogo from "@/assets/tasknest.svg";
+import { useContext, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { ThemeContext } from '@/context/ThemeContext';
+import { Sun, Moon, Menu, X } from 'lucide-react';
+import { useAuth0 } from '@auth0/auth0-react';
+import tasknestLogo from '@/assets/tasknest.svg';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext) ?? {
-    theme: "light",
+    theme: 'light',
     toggleTheme: () => {},
   };
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function Navbar() {
     useAuth0();
 
   // 👉 Replace with YOUR namespace used in Action
-  const roles = user?.["https://tnest.com"] || [];
+  const roles = user?.['https://tnest.com'] || [];
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -26,7 +26,7 @@ export default function Navbar() {
         <div className="w-8 h-8 bg-gradient-to-br">
           <img src={tasknestLogo} alt="TaskNest Logo" />
         </div>
-        <span className="text-2xl font-bold bg-gradient-to-r from-[var(--color-accent-start-light)] via-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent">
+        <span className="text-2xl font-bold bg-gradient-to-r from-[var(--accent-start-light)] via-[var(--primary-start)] to-[var(--primary-end)] bg-clip-text text-transparent">
           TaskNest
         </span>
       </div>
@@ -38,7 +38,7 @@ export default function Navbar() {
           onClick={toggleTheme}
           className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
         >
-          {theme === "dark" ? (
+          {theme === 'dark' ? (
             <Sun className="w-5 h-5 text-yellow-400" />
           ) : (
             <Moon className="w-5 h-5 text-primary" />
@@ -49,7 +49,7 @@ export default function Navbar() {
           <>
             {/* Optional: show name */}
             <span className="text-sm text-primary">
-              {user?.name} {roles.includes("admin") && "(Admin)"}
+              {user?.name} {roles.includes('admin') && '(Admin)'}
             </span>
 
             <Button
@@ -67,7 +67,7 @@ export default function Navbar() {
             onClick={() =>
               loginWithRedirect({
                 authorizationParams: {
-                  redirect_uri: window.location.origin + "/home",
+                  redirect_uri: window.location.origin + '/home',
                 },
               })
             }
@@ -97,7 +97,7 @@ export default function Navbar() {
             }}
             className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
           >
-            {theme === "dark" ? (
+            {theme === 'dark' ? (
               <Sun className="w-5 h-5 text-yellow-400" />
             ) : (
               <Moon className="w-5 h-5 text-primary" />
@@ -107,7 +107,7 @@ export default function Navbar() {
           {isAuthenticated ? (
             <>
               <span className="text-sm text-primary mb-2">
-                {user?.name} {roles.includes("admin") && "(Admin)"}
+                {user?.name} {roles.includes('admin') && '(Admin)'}
               </span>
 
               <Button
@@ -129,7 +129,7 @@ export default function Navbar() {
               onClick={() => {
                 loginWithRedirect({
                   authorizationParams: {
-                    redirect_uri: window.location.origin + "/home",
+                    redirect_uri: window.location.origin + '/home',
                   },
                 });
                 setMenuOpen(false);

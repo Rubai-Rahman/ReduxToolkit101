@@ -105,7 +105,7 @@ export default function WorkspaceSelector() {
         <div className="max-w-4xl mx-auto text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">
             Choose your{' '}
-            <span className="bg-gradient-to-r from-[#ff6b6b] to-[var(--color-primary-end)] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#ff6b6b] to-[var(--primary-end)] bg-clip-text text-transparent">
               workspace
             </span>
           </h1>
@@ -123,7 +123,7 @@ export default function WorkspaceSelector() {
             >
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#ff6b6b]/20 to-[var(--color-primary-end)]/20 rounded-xl flex items-center justify-center group-hover:from-[#ff6b6b] group-hover:to-[var(--color-primary-start)] transition-all duration-300">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#ff6b6b]/20 to-[var(--primary-end)]/20 rounded-xl flex items-center justify-center group-hover:from-[#ff6b6b] group-hover:to-[var(--primary-start)] transition-all duration-300">
                     <Building2 className="h-6 w-6 text-[#ff6b6b] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <Badge variant="secondary" className="text-xs">
@@ -131,7 +131,7 @@ export default function WorkspaceSelector() {
                     {workspace.members.length}
                   </Badge>
                 </div>
-                <CardTitle className="text-xl group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#ff6b6b] group-hover:to-[var(--color-primary-start)] group-hover:bg-clip-text transition-all duration-300">
+                <CardTitle className="text-xl group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#ff6b6b] group-hover:to-[var(--primary-start)] group-hover:bg-clip-text transition-all duration-300">
                   {workspace.name}
                 </CardTitle>
                 {workspace.description && (
@@ -171,10 +171,10 @@ export default function WorkspaceSelector() {
             <DialogTrigger asChild>
               <Card className="border-2 border-dashed border-border/50 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-xl cursor-pointer group hover:border-[#ff6b6b]/30">
                 <CardContent className="flex flex-col items-center justify-center h-full p-8 text-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#ff6b6b]/20 to-[var(--color-primary-end)]/20 rounded-xl flex items-center justify-center mb-4 group-hover:from-[#ff6b6b] group-hover:to-[var(--color-primary-start)] transition-all duration-300">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#ff6b6b]/20 to-[var(--primary-end)]/20 rounded-xl flex items-center justify-center mb-4 group-hover:from-[#ff6b6b] group-hover:to-[var(--primary-start)] transition-all duration-300">
                     <Plus className="h-6 w-6 text-[#ff6b6b] group-hover:text-white" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#ff6b6b] group-hover:to-[var(--color-primary-start)] group-hover:bg-clip-text transition-all duration-300">
+                  <h3 className="font-semibold text-lg mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#ff6b6b] group-hover:to-[var(--primary-start)] group-hover:bg-clip-text transition-all duration-300">
                     Create New Workspace
                   </h3>
                   <p className="text-sm text-muted-foreground">
@@ -214,7 +214,7 @@ export default function WorkspaceSelector() {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#ff6b6b] to-[var(--color-primary-start)]"
+                  className="w-full bg-gradient-to-r from-[#ff6b6b] to-[var(--primary-start)]"
                   disabled={isCreating}
                 >
                   {isCreating ? 'Creating...' : 'Create Workspace'}

@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import type React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import type React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import {
   Sidebar,
   SidebarContent,
@@ -27,7 +27,7 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 import {
   CheckCircle,
   Home,
@@ -41,8 +41,8 @@ import {
   Building2,
   Calendar,
   BarChart3,
-} from "lucide-react";
-import { useSelector } from "react-redux";
+} from 'lucide-react';
+import { useSelector } from 'react-redux';
 // import type { RootState } from '../store/store';
 // import { useGetMyTasksQuery } from '../store/api/taskApi';
 
@@ -53,51 +53,51 @@ interface WorkspaceLayoutProps {
 export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
   const { user, logout } = useAuth0();
   const currentWorkspace = useSelector(
-    (state: RootState) => state.workspace.currentWorkspace,
+    (state: RootState) => state.workspace.currentWorkspace
   );
   const { data: myTasks = [] } = useGetMyTasksQuery();
 
   const unreadTasksCount = myTasks.filter(
-    (task) => task.status === "todo" && task.assigneeId === user?.sub,
+    (task) => task.status === 'todo' && task.assigneeId === user?.sub
   ).length;
 
   const navigation = [
     {
-      title: "Overview",
+      title: 'Overview',
       items: [
         {
-          title: "Home",
+          title: 'Home',
           url: `/workspace/${currentWorkspace?.slug}`,
           icon: Home,
         },
         {
-          title: "Inbox",
+          title: 'Inbox',
           url: `/workspace/${currentWorkspace?.slug}/inbox`,
           icon: Inbox,
           badge: unreadTasksCount,
         },
         {
-          title: "My Tasks",
+          title: 'My Tasks',
           url: `/workspace/${currentWorkspace?.slug}/my-tasks`,
           icon: CheckCircle,
         },
       ],
     },
     {
-      title: "Workspace",
+      title: 'Workspace',
       items: [
         {
-          title: "Projects",
+          title: 'Projects',
           url: `/workspace/${currentWorkspace?.slug}/projects`,
           icon: BarChart3,
         },
         {
-          title: "Team",
+          title: 'Team',
           url: `/workspace/${currentWorkspace?.slug}/team`,
           icon: Users,
         },
         {
-          title: "Calendar",
+          title: 'Calendar',
           url: `/workspace/${currentWorkspace?.slug}/calendar`,
           icon: Calendar,
         },
@@ -111,7 +111,7 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
         <Sidebar className="border-r border-border/50">
           <SidebarHeader>
             <div className="flex items-center space-x-2 px-2 py-1">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#ff6b6b] via-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#ff6b6b] via-[var(--primary-start)] to-[var(--primary-end)] rounded-lg flex items-center justify-center">
                 <CheckCircle className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1 min-w-0">
@@ -135,7 +135,7 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
                   <DropdownMenuContent align="start" className="w-64">
                     <DropdownMenuItem
                       onClick={() =>
-                        (window.location.href = "/workspace-selector")
+                        (window.location.href = '/workspace-selector')
                       }
                     >
                       <Building2 className="h-4 w-4 mr-2" />
@@ -182,7 +182,7 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
                             {item.badge && item.badge > 0 && (
                               <Badge
                                 variant="secondary"
-                                className="ml-auto h-5 px-1.5 text-xs bg-gradient-to-r from-[#ff6b6b] to-[var(--color-primary-start)] text-white"
+                                className="ml-auto h-5 px-1.5 text-xs bg-gradient-to-r from-[#ff6b6b] to-[var(--primary-start)] text-white"
                               >
                                 {item.badge}
                               </Badge>
@@ -206,7 +206,7 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
                       <div className="flex items-center space-x-2">
                         {user?.picture ? (
                           <img
-                            src={user.picture || "/placeholder.svg"}
+                            src={user.picture || '/placeholder.svg'}
                             alt={user.name}
                             className="w-6 h-6 rounded-full"
                           />
@@ -257,7 +257,7 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
             <Button variant="ghost" size="icon">
               <Bell className="h-4 w-4" />
             </Button>
-            <Button className="bg-gradient-to-r from-[#ff6b6b] to-[var(--color-primary-start)] hover:from-[var(--color-primary-start)] hover:to-[var(--color-primary-end)]">
+            <Button className="bg-gradient-to-r from-[#ff6b6b] to-[var(--primary-start)] hover:from-[var(--primary-start)] hover:to-[var(--primary-end)]">
               <Plus className="h-4 w-4 mr-2" />
               New Task
             </Button>

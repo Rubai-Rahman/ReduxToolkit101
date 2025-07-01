@@ -63,7 +63,7 @@ const Testimonials = () => {
                       {parts[1]}
                     </p>
                     <div className="items-center mt-4 flex gap-4">
-                      <div className=" size-10 rounded-full flex items-center justify-center gradient-bg-1">
+                      <div className=" size-10 rounded-full flex items-center justify-center bg-gradient-1">
                         <span className="text-white font-semibold">
                           {initials}
                         </span>

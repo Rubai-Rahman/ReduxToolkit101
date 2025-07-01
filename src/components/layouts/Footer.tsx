@@ -1,4 +1,4 @@
-import tasknestLogo from "@/assets/tasknest.svg";
+import tasknestLogo from '@/assets/tasknest.svg';
 
 const Footer = () => {
   return (
@@ -14,7 +14,7 @@ const Footer = () => {
             </div>
             <p className="text-muted-foreground">
               Empowering teams to achieve more through
-              <span className="bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] bg-clip-text text-transparent font-semibold">
+              <span className="bg-gradient-to-r from-[var(--primary-start)] to-[var(--primary-end)] bg-clip-text text-transparent font-semibold">
                 intelligent task management
               </span>
               .
