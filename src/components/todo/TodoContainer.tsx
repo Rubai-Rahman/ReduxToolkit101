@@ -1,25 +1,23 @@
-import { Checkbox } from "../ui/checkbox";
-import TodoCard from "./TodoCard";
+import TaskItem from "./TaskItem";
 
 const TodoContainer = () => {
   return (
     <div className=" w-full p-5 bg-accent border-primary rounded-md space-y-1.5 border-gradient-primary ">
       <div className="flex justify-between p-4">
-        <Checkbox />
+        <span className="text-lg font-medium">Status</span>
         <span className="text-lg font-medium">Task Name</span>
         <span className="text-lg font-medium">Task Description </span>
-        <span>Badge</span>
+        <span>Completion</span>
         <div className="space-x-4">
-          <span>Edit</span>
-          <span>Delete</span>
+          <span>Actions</span>
         </div>
       </div>
-      <TodoCard />
-      <TodoCard />
-      <TodoCard />
-      <TodoCard />
-      <TodoCard />
-      <TodoCard />
+      <TaskItem />
+      <TaskItem />
+      <TaskItem />
+      <TaskItem />
+      <TaskItem />
+      <TaskItem />
     </div>
   );
 };
