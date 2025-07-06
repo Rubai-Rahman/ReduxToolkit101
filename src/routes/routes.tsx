@@ -6,6 +6,7 @@ import Home from "@/pages/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Tasks from "@/pages/Tasks/Tasks";
+import NotFound from "@/components/404-Notfound";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
             <Tasks />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
