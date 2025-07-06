@@ -12,13 +12,13 @@ import { projects } from '@/data/dashboardData';
 
 export function ProjectsOverview() {
   return (
-    <Card className="border-0 shadow-sm">
+    <Card className="stat-card">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <FolderOpen className="h-5 w-5" />
+        <CardTitle className="flex items-center gap-2 text-foreground">
+          <FolderOpen className="h-5 w-5 text-primary" />
           Active Projects
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="text-muted-foreground">
           Overview of your current projects and their progress
         </CardDescription>
       </CardHeader>
@@ -27,34 +27,34 @@ export function ProjectsOverview() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className={`rounded-xl bg-gradient-to-br ${project.bgColor} p-6 border`}
+              className={`rounded-xl stat-card p-6 border`}
             >
               <div className="space-y-4">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-semibold text-slate-900">
+                    <h3 className="font-semibold text-foreground">
                       {project.name}
                     </h3>
                     <Badge
                       variant={
-                        project.status === 'on-track' ? 'default' : 'destructive'
+                        project.status === 'on-track' ? 'secondary' : 'destructive'
                       }
-                      className={`mt-2 ${project.status === 'on-track' ? 'bg-green-100 text-green-800 hover:bg-green-100' : ''}`}
+                      className="mt-2"
                     >
                       {project.status === 'on-track' ? 'On Track' : 'At Risk'}
                     </Badge>
                   </div>
                   <div
-                    className={`rounded-full bg-gradient-to-r ${project.color} p-2`}
+                    className={`rounded-full bg-gradient-to-r from-primary-start to-primary-end p-2`}
                   >
-                    <FolderOpen className="h-4 w-4 text-white" />
+                    <FolderOpen className="h-4 w-4 text-primary-foreground" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-600">Progress</span>
-                    <span className="font-medium text-slate-900">
+                    <span className="text-muted-foreground">Progress</span>
+                    <span className="font-medium text-foreground">
                       {project.progress}%
                     </span>
                   </div>
@@ -63,20 +63,20 @@ export function ProjectsOverview() {
 
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <p className="text-slate-600">Tasks</p>
-                    <p className="font-medium text-slate-900">
+                    <p className="text-muted-foreground">Tasks</p>
+                    <p className="font-medium text-foreground">
                       {project.completedTasks}/{project.totalTasks}
                     </p>
                   </div>
                   <div>
-                    <p className="text-slate-600">Members</p>
-                    <p className="font-medium text-slate-900">
+                    <p className="text-muted-foreground">Members</p>
+                    <p className="font-medium text-foreground">
                       {project.members}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1 text-sm text-slate-600">
+                <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Calendar className="h-3 w-3" />
                   <span>Due {project.deadline}</span>
                 </div>

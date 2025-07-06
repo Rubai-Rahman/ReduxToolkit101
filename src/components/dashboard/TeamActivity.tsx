@@ -13,13 +13,13 @@ import { getActivityIcon } from '@/lib/dashboardUtils';
 export function TeamActivity() {
   return (
     <div>
-      <Card className="border-0 shadow-sm">
+      <Card className="stat-card">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Users className="h-5 w-5" />
+          <CardTitle className="flex items-center gap-2 text-foreground">
+            <Users className="h-5 w-5 text-primary" />
             Team Activity
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-muted-foreground">
             Recent team updates and actions
           </CardDescription>
         </CardHeader>
@@ -28,16 +28,16 @@ export function TeamActivity() {
             <div key={activity.id}>
               <div className="flex items-start gap-3">
                 <div
-                  className={`rounded-full bg-gradient-to-r ${activity.user.color} p-2`}
+                  className={`rounded-full bg-gradient-to-r from-primary-start to-primary-end p-2`}
                 >
-                  <span className="text-xs font-medium text-white">
+                  <span className="text-xs font-medium text-primary-foreground">
                     {activity.user.initials}
                   </span>
                 </div>
                 <div className="flex-1 space-y-1">
                   <div className="flex items-center gap-2">
                     {getActivityIcon(activity.type)}
-                    <p className="text-sm">
+                    <p className="text-sm text-foreground">
                       <span className="font-medium">
                         {activity.user.name}
                       </span>{' '}
