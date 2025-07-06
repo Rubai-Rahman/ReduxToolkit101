@@ -1,8 +1,8 @@
 'use client';
-import Testimonials from '@/components/Landing/Testimonials';
-import HeroSection from '@/components/Landing/HeroSection';
-import Features from '@/components/Landing/Features';
-import CtaSection from '@/components/Landing/CtaSection';
+import Testimonials from '@/components/landing/Testimonials';
+import HeroSection from '@/components/landing/HeroSection';
+import Features from '@/components/landing/Features';
+import CtaSection from '@/components/landing/CtaSection';
 
 export default function LandingPage() {
   return (
