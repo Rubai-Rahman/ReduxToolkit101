@@ -14,7 +14,7 @@ export default function Navbar() {
 
   const { loginWithRedirect, logout, user, isAuthenticated, isLoading } =
     useAuth0();
-
+  console.log(user);
   // 👉 Replace with YOUR namespace used in Action
   const roles = user?.['https://tnest.com'] || [];
   if (isLoading) return <p>Loading...</p>;
