@@ -67,7 +67,7 @@ export default function Navbar() {
             onClick={() =>
               loginWithRedirect({
                 authorizationParams: {
-                  redirect_uri: window.location.origin + '/home',
+                  redirect_uri: window.location.origin + '/onboarding',
                 },
               })
             }
@@ -129,7 +129,7 @@ export default function Navbar() {
               onClick={() => {
                 loginWithRedirect({
                   authorizationParams: {
-                    redirect_uri: window.location.origin + '/home',
+                    redirect_uri: window.location.origin + '/onboarding',
                   },
                 });
                 setMenuOpen(false);
