@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ThemeContext } from '@/context/ThemeContext';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import { useAuth0 } from '@auth0/auth0-react';
 import tasknestLogo from '@/assets/tasknest.svg';
+import { useSyncUserMutation } from '@/redux/api/apiSlice';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext) ?? {
@@ -12,8 +13,43 @@ export default function Navbar() {
   };
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } =
-    useAuth0();
+  const {
+    loginWithRedirect,
+    logout,
+    user,
+    isAuthenticated,
+    isLoading,
+    getAccessTokenSilently,
+  } = useAuth0();
+
+  const [syncUser] = useSyncUserMutation();
+  const [hasSynced, setHasSynced] = useState(false);
+
+  useEffect(() => {
+    const sync = async () => {
+      if (isAuthenticated && user && !hasSynced) {
+        try {
+          const token = await getAccessTokenSilently();
+          localStorage.setItem('accessToken', token); // optional
+
+          await syncUser({
+            authId: user.sub,
+            name: user.name,
+            email: user.email,
+            picture: user.picture,
+            emailVerified: user.email_verified,
+          }).unwrap();
+
+          setHasSynced(true); // ✅ prevent re-syncing
+        } catch (error) {
+          console.error('❌ User sync failed:', error);
+        }
+      }
+    };
+
+    sync();
+  }, [isAuthenticated, user, hasSynced]);
+
   console.log(user);
   // 👉 Replace with YOUR namespace used in Action
   const roles = user?.['https://tnest.com'] || [];
