@@ -145,7 +145,7 @@ export default function Navbar() {
               <span className="text-sm text-primary mb-2">
                 {user?.name} {roles.includes('admin') && '(Admin)'}
               </span>
-
+ 
               <Button
                 variant="outline"
                 onClick={() => {

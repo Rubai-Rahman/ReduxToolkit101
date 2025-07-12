@@ -241,7 +241,7 @@ export default function WorkspaceSelector() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-accent/30 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-accent/30 relative overflow-hidden mt-10">
       {/* Background Effects using CSS variables */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[var(--primary-start)]/10 to-[var(--secondary-start)]/10 rounded-full blur-3xl animate-pulse"></div>
