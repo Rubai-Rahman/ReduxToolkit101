@@ -13,14 +13,8 @@ export default function Navbar() {
   };
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const {
-    loginWithRedirect,
-    logout,
-    user,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } =
+    useAuth0();
 
   const [syncUser] = useSyncUserMutation();
   const [hasSynced, setHasSynced] = useState(false);
@@ -29,9 +23,6 @@ export default function Navbar() {
     const sync = async () => {
       if (isAuthenticated && user && !hasSynced) {
         try {
-          const token = await getAccessTokenSilently();
-          localStorage.setItem('accessToken', token); // optional
-
           await syncUser({
             authId: user.sub,
             name: user.name,
@@ -145,7 +136,7 @@ export default function Navbar() {
               <span className="text-sm text-primary mb-2">
                 {user?.name} {roles.includes('admin') && '(Admin)'}
               </span>
- 
+
               <Button
                 variant="outline"
                 onClick={() => {

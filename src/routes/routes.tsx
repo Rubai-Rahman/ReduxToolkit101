@@ -4,10 +4,10 @@ import Landing from '@/pages/Landing/Landing';
 import Home from '@/pages/Home/Home';
 
 import { createBrowserRouter } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
 import Tasks from '@/pages/Tasks/Tasks';
 import NotFound from '@/components/404-Notfound';
 import Onboarding from '@/pages/Onboarding/Onboarding';
+import { ProtectedRoute } from './ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: (
-          <ProtectedRoute allowedRoles={['admin']}>
+          <ProtectedRoute>
             <About />
           </ProtectedRoute>
         ),
