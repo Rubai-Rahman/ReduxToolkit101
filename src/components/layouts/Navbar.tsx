@@ -8,7 +8,6 @@ import { useSyncUserMutation } from '@/redux/api/apiSlice';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext) ?? {
-    theme: 'light',
     toggleTheme: () => {},
   };
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,7 +30,7 @@ export default function Navbar() {
             emailVerified: user.email_verified,
           }).unwrap();
 
-          setHasSynced(true); // ✅ prevent re-syncing
+          setHasSynced(true);
         } catch (error) {
           console.error('❌ User sync failed:', error);
         }

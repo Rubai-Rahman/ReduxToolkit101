@@ -7,6 +7,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from '@/routes/routes.tsx';
 import { ThemeProvider } from './context/ThemeContext';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { AuthTokenProvider } from './context/TokenContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -20,11 +21,13 @@ createRoot(document.getElementById('root')!).render(
       cacheLocation="memory" // ✅ add this!
       useRefreshTokens={true}
     >
-      <Provider store={store}>
-        <ThemeProvider>
-          <RouterProvider router={router} />
-        </ThemeProvider>
-      </Provider>
+      <AuthTokenProvider>
+        <Provider store={store}>
+          <ThemeProvider>
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </Provider>
+      </AuthTokenProvider>
     </Auth0Provider>
   </StrictMode>
 );
