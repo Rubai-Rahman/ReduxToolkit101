@@ -6,7 +6,7 @@ import Footer from './Footer';
 
 const MainLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen container mx-auto">
       <Navbar />
 
       {/* Main content grows and pushes footer down */}

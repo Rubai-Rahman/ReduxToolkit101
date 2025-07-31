@@ -4,7 +4,7 @@ import Dashboard from '@/components/dashboard/Dashboard';
 // import TodoFilter from '@/components/todo/TodoFilter';
 // import { TodoForm } from '@/components/todo/TodoForm';
 import Container from '@/components/ui/Container';
-import WorkspaceSelector from '@/components/Workspace-selector';
+// import WorkspaceSelector from '@/components/Workspace-selector';
 
 const Home = () => {
   return (
@@ -17,7 +17,7 @@ const Home = () => {
         <TodoFilter />
       </div> */}
       <Dashboard />
-      <WorkspaceSelector />
+      {/* <WorkspaceSelector /> */}
       {/* <TodoContainer /> */}
     </Container>
   );

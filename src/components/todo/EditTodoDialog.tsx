@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -10,7 +9,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -22,9 +20,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { addTodo, type Todo } from '@/redux/features/todo/todoSlice';
+import { updateTodo, type Todo } from '@/redux/features/todo/todoSlice';
 
-interface TodoFormData {
+interface EditTodoDialogProps {
+  todo: Todo;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+interface EditFormData {
   title: string;
   description: string;
   priority: 'high' | 'medium' | 'low';
@@ -32,20 +36,36 @@ interface TodoFormData {
   category: string;
 }
 
-export function TodoForm() {
+export function EditTodoDialog({
+  todo,
+  open,
+  onOpenChange,
+}: EditTodoDialogProps) {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [formData, setFormData] = useState<TodoFormData>({
+  const [formData, setFormData] = useState<EditFormData>({
     title: '',
     description: '',
     priority: 'medium',
     dueDate: '',
     category: '',
   });
-  const [errors, setErrors] = useState<Partial<TodoFormData>>({});
+  const [errors, setErrors] = useState<Partial<EditFormData>>({});
+
+  // Update form data when todo changes
+  useEffect(() => {
+    if (todo) {
+      setFormData({
+        title: todo.title,
+        description: todo.description,
+        priority: todo.priority,
+        dueDate: todo.dueDate || '',
+        category: todo.category || '',
+      });
+    }
+  }, [todo]);
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<TodoFormData> = {};
+    const newErrors: Partial<EditFormData> = {};
 
     if (!formData.title.trim()) {
       newErrors.title = 'Title is required';
@@ -64,10 +84,7 @@ export function TodoForm() {
 
     if (!validateForm()) return;
 
-    const todoData: Omit<
-      Todo,
-      'id' | 'createdAt' | 'updatedAt' | 'isCompleted'
-    > = {
+    const updates = {
       title: formData.title.trim(),
       description: formData.description.trim(),
       priority: formData.priority,
@@ -75,21 +92,12 @@ export function TodoForm() {
       category: formData.category.trim() || undefined,
     };
 
-    dispatch(addTodo(todoData));
-
-    // Reset form
-    setFormData({
-      title: '',
-      description: '',
-      priority: 'medium',
-      dueDate: '',
-      category: '',
-    });
+    dispatch(updateTodo({ id: todo.id, updates }));
     setErrors({});
-    setOpen(false);
+    onOpenChange(false);
   };
 
-  const handleInputChange = (field: keyof TodoFormData, value: string) => {
+  const handleInputChange = (field: keyof EditFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
@@ -98,27 +106,21 @@ export function TodoForm() {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="gap-2">
-          <Plus className="h-4 w-4" />
-          Add Task
-        </Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Create New Task</DialogTitle>
+            <DialogTitle>Edit Task</DialogTitle>
             <DialogDescription>
-              Add a new task to your todo list. Fill in the details below.
+              Make changes to your task. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="title">Title *</Label>
+              <Label htmlFor="edit-title">Title *</Label>
               <Input
-                id="title"
+                id="edit-title"
                 value={formData.title}
                 onChange={(e) => handleInputChange('title', e.target.value)}
                 placeholder="Enter task title"
@@ -130,9 +132,9 @@ export function TodoForm() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="description">Description *</Label>
+              <Label htmlFor="edit-description">Description *</Label>
               <Textarea
-                id="description"
+                id="edit-description"
                 value={formData.description}
                 onChange={(e) =>
                   handleInputChange('description', e.target.value)
@@ -150,7 +152,7 @@ export function TodoForm() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="priority">Priority</Label>
+                <Label htmlFor="edit-priority">Priority</Label>
                 <Select
                   value={formData.priority}
                   onValueChange={(value: 'high' | 'medium' | 'low') =>
@@ -169,9 +171,9 @@ export function TodoForm() {
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="dueDate">Due Date</Label>
+                <Label htmlFor="edit-dueDate">Due Date</Label>
                 <Input
-                  id="dueDate"
+                  id="edit-dueDate"
                   type="date"
                   value={formData.dueDate}
                   onChange={(e) => handleInputChange('dueDate', e.target.value)}
@@ -180,9 +182,9 @@ export function TodoForm() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="category">Category</Label>
+              <Label htmlFor="edit-category">Category</Label>
               <Input
-                id="category"
+                id="edit-category"
                 value={formData.category}
                 onChange={(e) => handleInputChange('category', e.target.value)}
                 placeholder="Enter category (optional)"
@@ -196,7 +198,7 @@ export function TodoForm() {
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit">Create Task</Button>
+            <Button type="submit">Save Changes</Button>
           </DialogFooter>
         </form>
       </DialogContent>

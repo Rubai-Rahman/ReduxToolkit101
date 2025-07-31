@@ -8,6 +8,7 @@ import router from '@/routes/routes.tsx';
 import { ThemeProvider } from './context/ThemeContext';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthTokenProvider } from './context/TokenContext';
+import { WorkspaceProvider } from './context/WorkspaceContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,14 +19,16 @@ createRoot(document.getElementById('root')!).render(
         redirect_uri: window.location.origin + '/onboarding',
         audience: import.meta.env.VITE_AUTH0_AUDIENCE,
       }}
-      cacheLocation="memory" // ✅ add this!
+      cacheLocation="memory"
       useRefreshTokens={true}
     >
       <AuthTokenProvider>
         <Provider store={store}>
-          <ThemeProvider>
-            <RouterProvider router={router} />
-          </ThemeProvider>
+          <WorkspaceProvider>
+            <ThemeProvider>
+              <RouterProvider router={router} />
+            </ThemeProvider>
+          </WorkspaceProvider>
         </Provider>
       </AuthTokenProvider>
     </Auth0Provider>
