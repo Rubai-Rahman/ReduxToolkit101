@@ -1,6 +1,4 @@
-// src/context/AuthTokenContext.tsx
-
-import { createContext, useContext, type FC, type ReactNode, } from 'react';
+import { createContext, useContext, type FC, type ReactNode } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 type TokenContextType = { getTokenSilently: () => Promise<string | null> };

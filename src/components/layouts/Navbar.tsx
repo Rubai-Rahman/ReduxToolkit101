@@ -5,6 +5,7 @@ import { Sun, Moon, Menu, X } from 'lucide-react';
 import { useAuth0 } from '@auth0/auth0-react';
 import tasknestLogo from '@/assets/tasknest.svg';
 import { setTokenFetcher, useSyncUserMutation } from '@/redux/api/apiSlice';
+import { useToken } from '@/context/TokenContext';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext) ?? {
@@ -12,27 +13,18 @@ export default function Navbar() {
   };
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const {
-    loginWithRedirect,
-    logout,
-    user,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+  const { getTokenSilently } = useToken();
 
   const [syncUser] = useSyncUserMutation();
   const [hasSynced, setHasSynced] = useState(false);
-  // AppInit.tsx
 
+  // Set the token fetcher for API calls
   useEffect(() => {
-    setTokenFetcher(() =>
-      getAccessTokenSilently({
-        authorizationParams: { audience: import.meta.env.VITE_AUTH0_AUDIENCE },
-      })
-    );
-  }, [isAuthenticated, getAccessTokenSilently]);
+    setTokenFetcher(getTokenSilently);
+  }, [getTokenSilently]);
 
+  // Sync user on login
   useEffect(() => {
     const sync = async () => {
       if (isAuthenticated && user && !hasSynced) {
@@ -53,12 +45,9 @@ export default function Navbar() {
     };
 
     sync();
-  }, [isAuthenticated, user, hasSynced]);
+  }, [isAuthenticated, user, hasSynced, syncUser]);
 
-  console.log(user);
-  // 👉 Replace with YOUR namespace used in Action
   const roles = user?.['https://tnest.com'] || [];
-  if (isLoading) return <p>Loading...</p>;
 
   return (
     <nav className="fixed top-0 left-0 w-full flex items-center justify-between p-4 border-b bg-background z-50">
@@ -88,11 +77,9 @@ export default function Navbar() {
 
         {isAuthenticated ? (
           <>
-            {/* Optional: show name */}
             <span className="text-sm text-primary">
               {user?.name} {roles.includes('admin') && '(Admin)'}
             </span>
-
             <Button
               variant="outline"
               onClick={() =>
@@ -118,7 +105,7 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* Right: Mobile menu toggle */}
+      {/* Mobile menu toggle */}
       <button
         aria-label="Toggle Menu"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -127,7 +114,7 @@ export default function Navbar() {
         {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
-      {/* Mobile menu content */}
+      {/* Mobile menu */}
       {menuOpen && (
         <div className="absolute top-full right-4 mt-2 flex flex-col items-end bg-background border rounded-md p-4 gap-4 shadow-lg md:hidden z-50">
           <button
@@ -150,14 +137,12 @@ export default function Navbar() {
               <span className="text-sm text-primary mb-2">
                 {user?.name} {roles.includes('admin') && '(Admin)'}
               </span>
-
               <Button
                 variant="outline"
                 onClick={() => {
                   logout({
                     logoutParams: { returnTo: window.location.origin },
                   });
-
                   setMenuOpen(false);
                 }}
               >
