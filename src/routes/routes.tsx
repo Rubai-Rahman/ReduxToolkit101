@@ -7,7 +7,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import Tasks from '@/pages/Tasks/Tasks';
 import NotFound from '@/components/404-Notfound';
 import Onboarding from '@/pages/Onboarding/Onboarding';
-import { ProtectedRoute } from './ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -20,35 +19,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/onboarding',
-        element: (
-          <ProtectedRoute requireWorkspace={false}>
-            <Onboarding />
-          </ProtectedRoute>
-        ),
+        element: <Onboarding />,
       },
       {
         path: '/home',
-        element: (
-          <ProtectedRoute requireWorkspace={true}>
-            <Home />
-          </ProtectedRoute>
-        ),
+        element: <Home />,
       },
       {
         path: '/about',
-        element: (
-          <ProtectedRoute requireWorkspace={true}>
-            <About />
-          </ProtectedRoute>
-        ),
+        element: <About />,
       },
       {
         path: '/tasks',
-        element: (
-          <ProtectedRoute requireWorkspace={true}>
-            <Tasks />
-          </ProtectedRoute>
-        ),
+        element: <Tasks />,
       },
       {
         path: '*',

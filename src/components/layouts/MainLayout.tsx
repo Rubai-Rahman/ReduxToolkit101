@@ -8,12 +8,10 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen container mx-auto">
       <Navbar />
-
       {/* Main content grows and pushes footer down */}
       <main className="flex-1">
         <Outlet />
       </main>
-
       <Footer />
     </div>
   );

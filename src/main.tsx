@@ -8,7 +8,6 @@ import router from '@/routes/routes.tsx';
 import { ThemeProvider } from './context/ThemeContext';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthTokenProvider } from './context/TokenContext';
-import { WorkspaceProvider } from './context/WorkspaceContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -24,11 +23,9 @@ createRoot(document.getElementById('root')!).render(
     >
       <AuthTokenProvider>
         <Provider store={store}>
-          <WorkspaceProvider>
-            <ThemeProvider>
-              <RouterProvider router={router} />
-            </ThemeProvider>
-          </WorkspaceProvider>
+          <ThemeProvider>
+            <RouterProvider router={router} />
+          </ThemeProvider>
         </Provider>
       </AuthTokenProvider>
     </Auth0Provider>
