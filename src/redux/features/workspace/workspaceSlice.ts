@@ -161,6 +161,41 @@ const workspaceSlice = createSlice({
     clearWorkspaceData: (state) => {
       return initialState;
     },
+
+    // Restore workspace from persistence
+    restoreWorkspace: (
+      state,
+      action: PayloadAction<{
+        workspace: Workspace;
+        userWorkspace: UserWorkspace;
+      }>
+    ) => {
+      const { workspace, userWorkspace } = action.payload;
+      state.currentWorkspace = workspace;
+      state.currentUserWorkspace = userWorkspace;
+      state.permissions = getPermissionsForRole(userWorkspace.role);
+      state.error = null;
+    },
+
+    // Validate workspace access
+    validateWorkspaceAccess: (
+      state,
+      action: PayloadAction<{ workspaceId: string; userId: string }>
+    ) => {
+      const { workspaceId, userId } = action.payload;
+      const hasAccess = state.userWorkspaces.some(
+        (uw) =>
+          uw.workspaceId === workspaceId && uw.userId === userId && uw.isActive
+      );
+
+      if (!hasAccess && state.currentWorkspace?.id === workspaceId) {
+        // User lost access to current workspace, clear it
+        state.currentWorkspace = null;
+        state.currentUserWorkspace = null;
+        state.permissions = [];
+        state.error = 'Access to workspace has been revoked';
+      }
+    },
   },
 });
 
@@ -225,6 +260,8 @@ export const {
   setError,
   clearError,
   clearWorkspaceData,
+  restoreWorkspace,
+  validateWorkspaceAccess,
 } = workspaceSlice.actions;
 
 // Selectors

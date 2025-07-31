@@ -61,7 +61,13 @@ export const authSlice = createApi({
       query: (userData) => ({
         url: '/auth/sync',
         method: 'POST',
-        body: userData,
+        body: {
+          authId: userData.auth0Id, // Map auth0Id to authId
+          email: userData.email,
+          name: userData.name,
+          picture: userData.avatarUrl, // Map avatarUrl to picture
+          emailVerified: true, // Default to true for Auth0 users
+        },
       }),
       invalidatesTags: ['User', 'Workspace'],
     }),

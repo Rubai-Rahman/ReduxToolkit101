@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useCallback,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import {
@@ -10,6 +15,11 @@ import {
   selectCurrentUserRole,
   selectUserPermissions,
   clearWorkspaceData,
+  setCurrentWorkspace,
+  setError,
+  clearError,
+  restoreWorkspace,
+  validateWorkspaceAccess as validateWorkspaceAccessAction,
 } from '@/redux/features/workspace/workspaceSlice';
 import type {
   Workspace,
@@ -44,6 +54,9 @@ interface WorkspaceContextValue {
 
   // Actions
   switchWorkspace: (workspaceId: string) => Promise<void>;
+  refreshWorkspaces: () => Promise<void>;
+  validateWorkspaceAccess: (workspaceId: string) => boolean;
+  clearWorkspaceError: () => void;
 
   // Permission helpers
   hasPermission: (
@@ -54,6 +67,10 @@ interface WorkspaceContextValue {
   canManageUsers: boolean;
   canManageTasks: boolean;
   canInviteUsers: boolean;
+
+  // Workspace validation
+  isWorkspaceAccessible: (workspaceId: string) => boolean;
+  getWorkspaceById: (workspaceId: string) => UserWorkspace | null;
 }
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
@@ -62,10 +79,15 @@ interface WorkspaceProviderProps {
   children: React.ReactNode;
 }
 
+// Constants for localStorage keys
+const WORKSPACE_STORAGE_KEY = 'tasknest_current_workspace';
+const WORKSPACE_EXPIRY_KEY = 'tasknest_workspace_expiry';
+const WORKSPACE_CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
 export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({
   children,
 }) => {
-  const { isAuthenticated, logout } = useAuth0();
+  const { isAuthenticated, logout, user } = useAuth0();
   const dispatch = useDispatch();
 
   // Redux selectors
@@ -88,23 +110,178 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({
   // API mutations
   const [switchWorkspaceMutation] = useSwitchWorkspaceMutation();
 
+  // Workspace persistence functions
+  const saveWorkspaceToStorage = useCallback(
+    (workspace: Workspace, userWorkspace: UserWorkspace) => {
+      try {
+        const workspaceData = {
+          workspace,
+          userWorkspace,
+          userId: user?.sub,
+          timestamp: Date.now(),
+        };
+        localStorage.setItem(
+          WORKSPACE_STORAGE_KEY,
+          JSON.stringify(workspaceData)
+        );
+        localStorage.setItem(
+          WORKSPACE_EXPIRY_KEY,
+          (Date.now() + WORKSPACE_CACHE_DURATION).toString()
+        );
+      } catch (error) {
+        console.warn('Failed to save workspace to localStorage:', error);
+      }
+    },
+    [user?.sub]
+  );
+
+  const loadWorkspaceFromStorage = useCallback((): {
+    workspace: Workspace;
+    userWorkspace: UserWorkspace;
+  } | null => {
+    try {
+      const expiryTime = localStorage.getItem(WORKSPACE_EXPIRY_KEY);
+      if (!expiryTime || Date.now() > parseInt(expiryTime)) {
+        // Clear expired data
+        localStorage.removeItem(WORKSPACE_STORAGE_KEY);
+        localStorage.removeItem(WORKSPACE_EXPIRY_KEY);
+        return null;
+      }
+
+      const storedData = localStorage.getItem(WORKSPACE_STORAGE_KEY);
+      if (!storedData) return null;
+
+      const workspaceData = JSON.parse(storedData);
+
+      // Validate that the stored data belongs to the current user
+      if (workspaceData.userId !== user?.sub) {
+        localStorage.removeItem(WORKSPACE_STORAGE_KEY);
+        localStorage.removeItem(WORKSPACE_EXPIRY_KEY);
+        return null;
+      }
+
+      return {
+        workspace: workspaceData.workspace,
+        userWorkspace: workspaceData.userWorkspace,
+      };
+    } catch (error) {
+      console.warn('Failed to load workspace from localStorage:', error);
+      return null;
+    }
+  }, [user?.sub]);
+
+  const clearWorkspaceFromStorage = useCallback(() => {
+    try {
+      localStorage.removeItem(WORKSPACE_STORAGE_KEY);
+      localStorage.removeItem(WORKSPACE_EXPIRY_KEY);
+    } catch (error) {
+      console.warn('Failed to clear workspace from localStorage:', error);
+    }
+  }, []);
+
   // Clear workspace data on logout
   useEffect(() => {
     if (!isAuthenticated) {
       dispatch(clearWorkspaceData());
+      clearWorkspaceFromStorage();
     }
-  }, [isAuthenticated, dispatch]);
+  }, [isAuthenticated, dispatch, clearWorkspaceFromStorage]);
 
-  // Switch workspace function
+  // Restore workspace from localStorage after sync is complete
+  useEffect(() => {
+    if (isSyncComplete && userWorkspaces.length > 0 && !currentWorkspace) {
+      const storedWorkspace = loadWorkspaceFromStorage();
+
+      if (storedWorkspace) {
+        // Validate that the user still has access to this workspace
+        const hasAccess = userWorkspaces.some(
+          (uw) => uw.workspaceId === storedWorkspace.workspace.id && uw.isActive
+        );
+
+        if (hasAccess) {
+          dispatch(restoreWorkspace(storedWorkspace));
+        } else {
+          // User no longer has access, clear storage
+          clearWorkspaceFromStorage();
+        }
+      }
+    }
+  }, [
+    isSyncComplete,
+    userWorkspaces,
+    currentWorkspace,
+    loadWorkspaceFromStorage,
+    clearWorkspaceFromStorage,
+    dispatch,
+  ]);
+
+  // Switch workspace function with persistence
   const switchWorkspace = async (workspaceId: string) => {
     try {
+      // Validate workspace access before switching
+      if (!validateWorkspaceAccess(workspaceId)) {
+        throw new Error('Access denied to this workspace');
+      }
+
       const result = await switchWorkspaceMutation(workspaceId).unwrap();
+
+      // Save to localStorage for persistence
+      saveWorkspaceToStorage(result.workspace, result.userWorkspace);
+
       // The workspace slice will be updated via the API response
     } catch (error) {
       console.error('Failed to switch workspace:', error);
+      dispatch(
+        setError(
+          error instanceof Error ? error.message : 'Failed to switch workspace'
+        )
+      );
       throw error;
     }
   };
+
+  // Refresh workspaces function
+  const refreshWorkspaces = async () => {
+    try {
+      // Trigger user sync to refresh workspace data
+      await retrySyncUser();
+    } catch (error) {
+      console.error('Failed to refresh workspaces:', error);
+      dispatch(setError('Failed to refresh workspace data'));
+    }
+  };
+
+  // Workspace validation functions
+  const validateWorkspaceAccess = useCallback(
+    (workspaceId: string): boolean => {
+      return userWorkspaces.some(
+        (uw) => uw.workspaceId === workspaceId && uw.isActive
+      );
+    },
+    [userWorkspaces]
+  );
+
+  const isWorkspaceAccessible = useCallback(
+    (workspaceId: string): boolean => {
+      return validateWorkspaceAccess(workspaceId);
+    },
+    [validateWorkspaceAccess]
+  );
+
+  const getWorkspaceById = useCallback(
+    (workspaceId: string): UserWorkspace | null => {
+      return (
+        userWorkspaces.find(
+          (uw) => uw.workspaceId === workspaceId && uw.isActive
+        ) || null
+      );
+    },
+    [userWorkspaces]
+  );
+
+  const clearWorkspaceError = useCallback(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   // Permission helper functions
   const hasPermission = (
@@ -147,12 +324,19 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({
 
     // Actions
     switchWorkspace,
+    refreshWorkspaces,
+    validateWorkspaceAccess,
+    clearWorkspaceError,
 
     // Permission helpers
     hasPermission,
     canManageUsers,
     canManageTasks,
     canInviteUsers,
+
+    // Workspace validation
+    isWorkspaceAccessible,
+    getWorkspaceById,
   };
 
   return (

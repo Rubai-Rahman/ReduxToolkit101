@@ -8,21 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   Plus,
-  Users,
   ArrowRight,
   Building2,
   AlertCircle,
@@ -34,9 +23,9 @@ import {
   selectWorkspaceSwitching,
   selectWorkspaceError,
 } from '@/redux/features/workspace/workspaceSlice';
-import { useCreateWorkspaceMutation } from '@/redux/api/apiSlice';
 import { useWorkspace } from '@/context/WorkspaceContext';
-import type { UserWorkspace, CreateWorkspaceRequest } from '@/types/workspace';
+import WorkspaceCreator from './WorkspaceCreator';
+import type { UserWorkspace, CreateWorkspaceResponse } from '@/types/workspace';
 
 // --- SUB-COMPONENTS ---
 
@@ -176,107 +165,6 @@ const ErrorState: React.FC<{ error: string; onRetry: () => void }> = ({
   </div>
 );
 
-interface CreateWorkspaceDialogProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-  onCreateWorkspace: (data: CreateWorkspaceRequest) => void;
-}
-
-const CreateWorkspaceDialog: React.FC<CreateWorkspaceDialogProps> = ({
-  isOpen,
-  onOpenChange,
-  onCreateWorkspace,
-}) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [createWorkspace, { isLoading: isCreating }] =
-    useCreateWorkspaceMutation();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim()) return;
-
-    try {
-      await createWorkspace({
-        name: name.trim(),
-        description: description.trim() || undefined,
-      }).unwrap();
-      onCreateWorkspace({
-        name: name.trim(),
-        description: description.trim() || undefined,
-      });
-      setName('');
-      setDescription('');
-      onOpenChange(false);
-    } catch (error) {
-      console.error('Failed to create workspace:', error);
-    }
-  };
-
-  return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Create New Workspace</DialogTitle>
-          <DialogDescription>
-            Create a new workspace to organize your projects and collaborate
-            with your team.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="name">Workspace Name</Label>
-            <Input
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="My Awesome Team"
-              required
-              disabled={isCreating}
-            />
-          </div>
-          <div>
-            <Label htmlFor="description">Description (Optional)</Label>
-            <Textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Describe what this workspace is for..."
-              rows={3}
-              disabled={isCreating}
-            />
-          </div>
-          <div className="flex gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-              disabled={isCreating}
-              className="flex-1"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              className="flex-1 bg-gradient-to-r from-[var(--primary-start)] to-[var(--primary-end)]"
-              disabled={isCreating || !name.trim()}
-            >
-              {isCreating ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Creating...
-                </>
-              ) : (
-                'Create Workspace'
-              )}
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
-  );
-};
-
 // --- MAIN COMPONENT ---
 
 export default function WorkspaceSelector() {
@@ -288,7 +176,6 @@ export default function WorkspaceSelector() {
   // Redux selectors
   const userWorkspaces = useSelector(selectUserWorkspaces);
   const isLoading = useSelector(selectWorkspaceLoading);
-  const isSwitching = useSelector(selectWorkspaceSwitching);
   const error = useSelector(selectWorkspaceError);
 
   // Workspace context
@@ -299,6 +186,7 @@ export default function WorkspaceSelector() {
       setSwitchingWorkspaceId(workspaceId);
       await switchWorkspace(workspaceId);
       // Navigation will be handled by the workspace context/routing logic
+      // The ProtectedRoute will redirect to the appropriate page once workspace is set
     } catch (error) {
       console.error('Failed to switch workspace:', error);
     } finally {
@@ -306,9 +194,10 @@ export default function WorkspaceSelector() {
     }
   };
 
-  const handleCreateWorkspace = (data: CreateWorkspaceRequest) => {
-    // Workspace creation is handled in the dialog component
+  const handleCreateWorkspace = (result: CreateWorkspaceResponse) => {
+    // Workspace creation is handled in the WorkspaceCreator component
     // The new workspace will appear in the list automatically via Redux
+    console.log('Workspace created successfully:', result.workspace.name);
   };
 
   const handleRetry = () => {
@@ -404,10 +293,11 @@ export default function WorkspaceSelector() {
         </div>
 
         {/* Create workspace dialog */}
-        <CreateWorkspaceDialog
+        <WorkspaceCreator
+          variant="dialog"
           isOpen={isCreateDialogOpen}
           onOpenChange={setIsCreateDialogOpen}
-          onCreateWorkspace={handleCreateWorkspace}
+          onSuccess={handleCreateWorkspace}
         />
       </main>
     </div>

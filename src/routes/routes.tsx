@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: '/onboarding',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute requireWorkspace={false}>
             <Onboarding />
           </ProtectedRoute>
         ),
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       {
         path: '/home',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute requireWorkspace={true}>
             <Home />
           </ProtectedRoute>
         ),
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute requireWorkspace={true}>
             <About />
           </ProtectedRoute>
         ),
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       {
         path: '/tasks',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute requireWorkspace={true}>
             <Tasks />
           </ProtectedRoute>
         ),
