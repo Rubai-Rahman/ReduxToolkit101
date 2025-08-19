@@ -28,13 +28,18 @@ export default function Navbar() {
   useEffect(() => {
     const sync = async () => {
       if (isAuthenticated && user && !hasSynced) {
+        // Validate required fields before syncing
+        if (!user.sub || !user.email || !user.name) {
+          console.error('❌ Missing required user fields for sync');
+          return;
+        }
+
         try {
           await syncUser({
-            authId: user.sub,
+            auth0Id: user.sub,
             name: user.name,
             email: user.email,
-            picture: user.picture,
-            emailVerified: user.email_verified,
+            avatarUrl: user.picture,
           }).unwrap();
 
           setHasSynced(true);

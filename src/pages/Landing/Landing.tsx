@@ -1,4 +1,3 @@
-'use client';
 import Testimonials from '@/components/landing/Testimonials';
 import HeroSection from '@/components/landing/HeroSection';
 import Features from '@/components/landing/Features';
